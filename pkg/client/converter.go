@@ -12,8 +12,6 @@ import (
 	"time"
 	"unsafe"
 
-	"fmt"
-
 	"github.com/cilium/ebpf"
 	"github.com/Hicky1025/srview/pkg/converter"
 	"github.com/Hicky1025/srview/pkg/bpf"
@@ -212,7 +210,7 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 						SegmentList: sl,
 					},
 				}
-				log.Printf(f)
+				log.Print(f)
 
 				//  Throw to channel
 				flowChan <- f
