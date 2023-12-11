@@ -31,7 +31,6 @@ func (e *Exporter) Run(raddr *net.UDPAddr, flowChan chan []ipfix.FieldValue) err
 	defer conn.Close()
 
 	var m *ipfix.Message
-	log.Printf("exp run")
 
 	// channel経由で取得したbpfのSRv6の情報を受け取る
 	for {
