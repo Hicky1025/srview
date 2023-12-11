@@ -44,12 +44,10 @@ func (e *Exporter) Run(raddr *net.UDPAddr, flowChan chan []ipfix.FieldValue) err
 			fss = append(fss, *fv.FieldSpecifier())
 		}
 		dataRec := &ipfix.DataRecord{FieldValues: fvs}
-		dataSet := ipfix.NewSet(e.tempRecSeq, []ipfix.Record{dataRec})
 		sets = append(sets, *dataSet)
 
 		// 2. メッセージとインクリメント・シークエンスの作成
 		m = ipfix.NewMessage(e.flowSeq, OBSERVATION_ID, sets)
-		e.tempRecSeq += uint16(len(tempSet.Records))
 		e.flowSeq += uint32(len(dataSet.Records))
 
 		// 3. メッセージの送信
