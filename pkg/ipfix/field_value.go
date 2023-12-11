@@ -32,7 +32,7 @@ func (fv *PacketDeltaCount) Len() uint16 {
 
 func (fv *PacketDeltaCount) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -54,7 +54,7 @@ func (fv *SRHFlagsIPv6) Len() uint16 {
 
 func (fv *SRHFlagsIPv6) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -78,7 +78,7 @@ func (fv *SRHTagIPv6) Len() uint16 {
 
 func (fv *SRHTagIPv6) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -100,7 +100,7 @@ func (fv *SRHSegmentIPv6) Len() uint16 {
 
 func (fv *SRHSegmentIPv6) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -122,7 +122,7 @@ func (fv *SRHActiveSegmentIPv6) Len() uint16 {
 
 func (fv *SRHActiveSegmentIPv6) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -165,7 +165,7 @@ func (fv *SRHSegmentIPv6BasicList) Len() uint16 {
 
 func (fv *SRHSegmentIPv6BasicList) FieldSpecifier() *FieldSpecifier {
 	templateLen := uint16(0xffff) // valiable
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -195,7 +195,7 @@ func (fv *SRHSegmentIPv6ListSection) Len() uint16 {
 
 func (fv *SRHSegmentIPv6ListSection) FieldSpecifier() *FieldSpecifier {
 	templateLen := uint16(0xffff) // valiable
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -217,7 +217,7 @@ func (fv *SRHSegmentsIPv6Left) Len() uint16 {
 
 func (fv *SRHSegmentsIPv6Left) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -239,7 +239,7 @@ func (fv *SRHIPv6ActiveSegmentType) Len() uint16 {
 
 func (fv *SRHIPv6ActiveSegmentType) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -261,7 +261,7 @@ func (fv *SRHSegmentIPv6LocatorLength) Len() uint16 {
 
 func (fv *SRHSegmentIPv6LocatorLength) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -285,7 +285,7 @@ func (fv *SRHSegmentIPv6EndpointBehavior) Len() uint16 {
 
 func (fv *SRHSegmentIPv6EndpointBehavior) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -309,7 +309,7 @@ func (fv *PathDelayMeanDeltaMicroseconds) Len() uint16 {
 
 func (fv *PathDelayMeanDeltaMicroseconds) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -333,7 +333,7 @@ func (fv *PathDelayMinDeltaMicroseconds) Len() uint16 {
 
 func (fv *PathDelayMinDeltaMicroseconds) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -357,7 +357,7 @@ func (fv *PathDelayMaxDeltaMicroseconds) Len() uint16 {
 
 func (fv *PathDelayMaxDeltaMicroseconds) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -381,7 +381,7 @@ func (fv *PathDelaySumDeltaMicroseconds) Len() uint16 {
 
 func (fv *PathDelaySumDeltaMicroseconds) FieldSpecifier() *FieldSpecifier {
 	templateLen := fv.Len()
-	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_NTTCOM)
+	fs := NewFieldSpecifier(false, fv.ElementID(), templateLen, ENTERPRISE_NUMBER_TMCIT)
 	return fs
 }
 
@@ -413,6 +413,8 @@ func (fv *UndefinedFieldValue) FieldSpecifier() *FieldSpecifier {
 	}
 	return fs
 }
+
+const ENTERPRISE_NUMBER_TMCIT uint32 = 29319 // NTT Communications
 
 const (
 	IEID_OCTET_DELTA_COUNT                uint16 = 1  // RFC5102
