@@ -17,7 +17,7 @@ type flags struct {
 func main() {
 	// 引数の定義
 	f := &flags{}
-	flag.StringVar(&f.configFile, "f", "fluvia.yaml", "Specify a configuration file")
+	flag.StringVar(&f.configFile, "f", "srview.yaml", "Specify a configuration file")
 	flag.StringVar(&f.ingressIfName, "i", "", "Specify a configuration file")
 	flag.Parse()
 
