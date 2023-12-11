@@ -212,7 +212,7 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 						SegmentList: sl,
 					},
 				}
-				fmt.Print(f)
+				log.Printf(f)
 
 				//  Throw to channel
 				flowChan <- f
