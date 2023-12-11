@@ -33,22 +33,22 @@ type Stats struct {
 
 type StatsMap struct {
 	Mu sync.RWMutex
-	Db map[meter.ProbeData]*Stats
+	Db map[converter.ProbeData]*Stats
 }
 
-type Meter struct {
+type Converter struct {
 	statsMap *StatsMap
 	bootTime time.Time
 	xdp      *bpf.Xdp
 }
 
-func NewMeter(ingressIfName string) *Meter {
+func NewConverter(ingressIfName string) *Converter {
 	bootTime, err := getSystemBootTime()
 	if err != nil {
 		log.Fatalf("Could not get boot time: %s", err)
 	}
 
-	statsMap := StatsMap{Db: make(map[meter.ProbeData]*Stats)}
+	statsMap := StatsMap{Db: make(map[converter.ProbeData]*Stats)}
 
 	iface, err := net.InterfaceByName(ingressIfName)
 	if err != nil {
@@ -78,14 +78,14 @@ func NewMeter(ingressIfName string) *Meter {
 	log.Printf("Press Ctrl-C to exit and remove the program")
 
 
-	return &Meter{
+	return &Converter{
 		statsMap: &statsMap,
 		bootTime: bootTime,
 		xdp:      xdp,
 	}
 }
 
-func (m *Meter) Run(flowChan chan []ipfix.FieldValue, interval time.Duration) error {
+func (m *Converter) Run(flowChan chan []ipfix.FieldValue, interval time.Duration) error {
 	eg, ctx := errgroup.WithContext(context.Background())
 
 	eg.Go(func() error {
@@ -102,7 +102,7 @@ func (m *Meter) Run(flowChan chan []ipfix.FieldValue, interval time.Duration) er
 	return nil
 }
 
-func (m *Meter) Read(ctx context.Context) error {
+func (m *Converter) Read(ctx context.Context) error {
 	perfEvent, err := m.xdp.NewPerfReader()
 	if err != nil {
 		log.Fatalf("Could not obtain perf reader: %s", err)
@@ -135,7 +135,7 @@ func (m *Meter) Read(ctx context.Context) error {
 
 			delay := receivedNano.Sub(SentNano)
 
-			probeData, err := meter.Parse(eventData.RawSample[metadata_size:])
+			probeData, err := converter.Parse(eventData.RawSample[metadata_size:])
 			if err != nil {
 				log.Fatalf("Could not parse the packet: %s", err)
 			}
@@ -170,7 +170,7 @@ func (m *Meter) Read(ctx context.Context) error {
 	}
 }
 
-func (m *Meter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, intervalSec time.Duration) error {
+func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, intervalSec time.Duration) error {
 	ticker := time.NewTicker(intervalSec * time.Second)
 	defer ticker.Stop()
 
@@ -209,10 +209,6 @@ func (m *Meter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, inte
 					&ipfix.SRHSegmentIPv6BasicList{
 						SegmentList: sl,
 					},
-					&ipfix.PathDelayMeanDeltaMicroseconds{Val: uint32(stat.DelayMean)},
-					&ipfix.PathDelayMinDeltaMicroseconds{Val: uint32(stat.DelayMin)},
-					&ipfix.PathDelayMaxDeltaMicroseconds{Val: uint32(stat.DelayMax)},
-					&ipfix.PathDelaySumDeltaMicroseconds{Val: uint32(stat.DelaySum)},
 				}
 				fmt.Print(f)
 
@@ -232,7 +228,7 @@ func (m *Meter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, inte
 	return nil
 }
 
-func (m *Meter) Close() error {
+func (m *Converter) Close() error {
 	if err := m.xdp.Close(); err != nil {
 		return err
 	}

@@ -22,19 +22,18 @@ func New(ingressIfName string, raddr *net.UDPAddr, interval int) ClientError {
 		}
 	}()
 
-	m := NewMeter(ingressIfName)
+	m := NewConverter(ingressIfName)
 	go func() {
 		err := m.Run(ch, time.Duration(interval))
 		if err != nil {
 			errChan <- ClientError{
-				Component: "meter",
+				Component: "converter",
 				Error:     err,
 			}
 		}
 		m.Close()
 	}()
 
-	// meterとexporterはgo routineで同期
 	for {
 		clientError := <-errChan
 		return clientError
