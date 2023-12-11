@@ -2,10 +2,8 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"net"
-	"os"
 
 	"github.com/Hicky1025/srview/pkg/config"
 	"github.com/Hicky1025/srview/pkg/client"
