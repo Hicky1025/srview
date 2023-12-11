@@ -174,6 +174,8 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 	ticker := time.NewTicker(intervalSec * time.Second)
 	defer ticker.Stop()
 
+	log.Printf("test")
+
 	for range ticker.C {
 		select {
 		case <-ctx.Done():
@@ -211,8 +213,6 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 					},
 				}
 				fmt.Print(f)
-
-				log.Printf("test")
 
 				//  Throw to channel
 				flowChan <- f
