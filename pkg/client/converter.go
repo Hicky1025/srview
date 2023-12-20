@@ -192,6 +192,7 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 					ipSeg, _ := netip.ParseAddr(seg)
 
 					// Ignore zero values received from bpf map
+					log.Print("test5")
 					if ipSeg == netip.IPv6Unspecified() {
 						break
 					}
