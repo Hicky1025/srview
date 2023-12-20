@@ -172,7 +172,7 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 	ticker := time.NewTicker(intervalSec * time.Second)
 	defer ticker.Stop()
 
-	log.Printf("test")
+	log.Print("test")
 
 	for range ticker.C {
 		select {
@@ -210,6 +210,7 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 						SegmentList: sl,
 					},
 				}
+				
 				log.Print(f)
 
 				//  Throw to channel
