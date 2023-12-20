@@ -212,6 +212,7 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 					},
 				}
 				
+				log.Print("test4")
 				log.Print(f)
 
 				//  Throw to channel
