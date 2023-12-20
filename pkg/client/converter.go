@@ -172,14 +172,15 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 	ticker := time.NewTicker(intervalSec * time.Second)
 	defer ticker.Stop()
 
-	log.Print("test")
-
 	for range ticker.C {
+		log.Print("test1")
 		select {
 		case <-ctx.Done():
+			log.Print("test2")
 			return nil
 		default:
 			m.statsMap.Mu.Lock()
+			log.Print("test3")
 			for probeData, stat := range m.statsMap.Db {
 				dCnt := uint64(stat.Count)
 
