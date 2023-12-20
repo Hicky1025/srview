@@ -186,13 +186,13 @@ func (m *Converter) Send(ctx context.Context, flowChan chan []ipfix.FieldValue, 
 
 				sl := []ipfix.SRHSegmentIPv6{}
 				for _, seg := range probeData.Segments {
+					log.Print("test5")
 					if seg == "" {
 						break
 					}
 					ipSeg, _ := netip.ParseAddr(seg)
 
 					// Ignore zero values received from bpf map
-					log.Print("test5")
 					if ipSeg == netip.IPv6Unspecified() {
 						break
 					}
