@@ -19,7 +19,7 @@ import (
 type testData struct {
 	sentSec    uint32
 	sentSubsec uint32
-	probeData  meter.ProbeData
+	probeData  converter.ProbeData
 }
 
 func generateInput(t *testing.T) []byte {
@@ -60,29 +60,29 @@ func generateInput(t *testing.T) []byte {
 	}
 
 	// Create the IPv6 Hop-By-Hop option layer
-	hbhLayer := &meter.HBHLayer{
+	hbhLayer := &converter.HBHLayer{
 		NextHeader: uint8(layers.IPProtocolIPv6Routing),
 		Length:     5,
-		Options: []meter.IoamOption{
+		Options: []converter.IoamOption{
 			{
-				Type: meter.IPV6_TLV_PAD1,
+				Type: converter.IPV6_TLV_PAD1,
 			},
 			{
-				Type: meter.IPV6_TLV_PAD1,
+				Type: converter.IPV6_TLV_PAD1,
 			},
 			{
 				Type:       0x31,
 				Length:     0x2a,
 				Reserved:   0x00,
 				OptionType: 0x00, // Pre-allocated Trace
-				TraceHeader: meter.IoamTrace{
+				TraceHeader: converter.IoamTrace{
 					NameSpaceId:  1,
 					NodeLen:      4,
 					Flags:        0b0000,
 					RemainingLen: 0b0000001,
 					Type:         [3]byte{0xf0, 0x00, 0x00},
 					Reserved:     0x00,
-					NodeDataList: []meter.NodeData{
+					NodeDataList: []converter.NodeData{
 						{
 							HopLimitNodeId:   [4]byte{0x00, 0x00, 0x00, 0x00},
 							IngressEgressIds: [4]byte{0x00, 0x00, 0x00, 0x00},
@@ -102,7 +102,7 @@ func generateInput(t *testing.T) []byte {
 	}
 
 	// Create the SRv6 extension header layer
-	seg6layer := &meter.Srv6Layer{
+	seg6layer := &converter.Srv6Layer{
 		NextHeader:   uint8(layers.IPProtocolUDP),
 		HdrExtLen:    uint8((8+16*len(segmentList))/8 - 1),
 		RoutingType:  4, // SRH
@@ -153,7 +153,7 @@ func TestXDPProg(t *testing.T) {
 	expected := testData{
 		sentSec:    0x6538d5f6,
 		sentSubsec: 0x3b533d00,
-		probeData: meter.ProbeData{
+		probeData: converter.ProbeData{
 			H_source:     "02:42:ac:11:00:02",
 			H_dest:       "02:42:ac:11:00:03",
 			V6Srcaddr:    "2001:db8::1",
@@ -202,7 +202,7 @@ func TestXDPProg(t *testing.T) {
 		t.Fatalf("XDP did not send raw packet")
 	}
 
-	probeData, err := meter.Parse(eventData.RawSample[metadataSize:])
+	probeData, err := converter.Parse(eventData.RawSample[metadataSize:])
 	if err != nil {
 		t.Fatal(err)
 	}
